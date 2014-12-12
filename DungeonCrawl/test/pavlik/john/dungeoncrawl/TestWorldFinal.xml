@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smallworld version="1.3" money="dollars" tickRate="50">
+  <place name="Hill" article="a" sound="sounds/inception-stab.wav">
+    <description>You have walked up a hill, still in the forest. A large tree at the top of the hill contains an empty bird's nest. The road slopes back down the other side of the hill. There is a building in the distance.</description>
+    <travel direction="E">Road</travel>
+  </place>
+  <place name="Canyon" article="the">
+    <description>You are in an awkward sloping east/west canyon.</description>
+    <travel direction="E">Debris Room</travel>
+    <travel direction="W">Bird Chamber</travel>
+  </place>
+  <place name="Slit in the Stream" article="the">
+    <description>At your feet all the water of the stream splashes into a 2-inch slit in the rock. Downstream the streambed is bare rock.</description>
+    <travel direction="N">Valley</travel>
+    <travel direction="S">Outside Grate</travel>
+  </place>
+  <place name="Road" article="a">
+    <description>You are [color=red]standing[/color] at the end of a road before a small brick building. Around you is a forest. A small stream flows out of the building and down a gully.</description>
+    <travel direction="S">Valley</travel>
+    <travel direction="E">Building</travel>
+    <travel direction="W">Hill</travel>
+  </place>
+  <place name="Bird Chamber" article="the">
+    <description>You are in a splendid chamber thirty feet high. The walls are frozen rivers of orange stone.  An awkward canyon and a good passage exit from east and west sides of the chamber.</description>
+    <travel direction="E">Canyon</travel>
+    <travel direction="W">Hall of Mists</travel>
+  </place>
+  <place name="Outside Grate" article="the">
+    <description>You are in a 20-foot depression floored with bare dirt. Set into the dirt is a strong steel grate mounted in concrete. A dry streambed leads into the depression.</description>
+    <travel direction="N">Slit in the Stream</travel>
+    <travel direction="S">Inside Grate</travel>
+  </place>
+  <place name="Inside Grate" article="the">
+    <description>You are in a small chamber by 3x3 steel grate to the surface. A low crawl over cobbles leads inward to the west.</description>
+    <travel direction="N">Outside Grate</travel>
+    <travel direction="W">Cobble Crawl</travel>
+  </place>
+  <place name="Building" article="the">
+    <description>You are inside a building, a well house for a large spring.</description>
+    <travel direction="W">Road</travel>
+  </place>
+  <place name="Debris Room" article="the">
+    <description>You are in a debris room filled with stuff washed in from the surface. A low wide passage with cobbles becomes plugged with mud and debris here, but an awkward canyon leads upward and west.  A note on the wall says "Magic word XYZZY".</description>
+    <travel direction="E">Cobble Crawl</travel>
+    <travel direction="W">Canyon</travel>
+  </place>
+  <place name="Shimmering Room" article="the" arrivalWinsGame="Y">
+    <description>You are in a room of shimmering bright white.</description>
+    <travel direction="S">Hall of Mists</travel>
+  </place>
+  <place name="Cobble Crawl" article="the">
+    <description>You are crawling over cobbles in a low passage. There is a dim light at the east end of the passage.</description>
+    <travel direction="E">Inside Grate</travel>
+    <travel direction="W">Debris Room</travel>
+  </place>
+  <place name="Valley" article="a" arrivalWinsGame="Y">
+    <description>You are in a valley in the forest beside a stream tumbling along a rocky bed.</description>
+    <travel direction="N">Road</travel>
+    <travel direction="S">Slit in the Stream</travel>
+  </place>
+  <place name="Hall of Mists" article="the">
+    <description>You are at one end of a vast hall stretching forward out of sight to the west, filled with wisps of white mist that sway to and fro almost as if alive.</description>
+    <travel direction="N">Shimmering Room</travel>
+    <travel direction="E">Bird Chamber</travel>
+  </place>
+  <player class="Rogue" name="player" article="" money="50" description="Stealthy" score="0" location="Road" respawn="Road"/>
+  <player name="Chris" score="0" article="" description=""  location="Road"/>
+  <player class="Mage" name="Jay" score="0" article="" description=""  location="Road"/>
+  <player class="Space Marine" name="Space Marine" score="0" article="A" description="The space marine is a kind of soldier that operates in outer space or on alien worlds."  location="Road"/>
+  <item name="Sack of Trinkets" article="a" location="Road" takePoints="5" dropPoints="-10" takeable="Y">
+    <place dropPoints="500">Hall of Mists</place>
+    <place blockedMsg="You might be able to trade some trinkets for a meal here.">Canyon</place>
+  </item>
+  <item name="Key" article="the" location="chris" takePoints="5" dropPoints="-5" takeable="Y" >
+  	<place blockedMsg="You need a key">Building</place>
+  </item>
+  <weapon name="Basic Dagger" article="the" location="player" takePoints="0" dropPoints="0" takeable="Y" type="dagger" target="single" effect="1d3" cooldown="1" hitChance="80" useMessage="stab" equipped="Y"/>
+  <weapon name="ground Dagger" article="the" location="road" takePoints="5" dropPoints="5" takeable="Y" type="dagger" target="single" effect="1d3" cooldown="1" hitChance="80" useMessage="stab" equipped="Y">
+  	<place dropPoints="5">road</place>
+  </weapon>
+  
+  <item name="rock" article="a" location="Road" takePoints="5" dropPoints="-10" description="It looks very heavy, you probably can't pick it up." takeable="N" 
+  	cantTakeMsg="You can not lift the rock." />
+  <item name="penny" article="a" location="jacket" takePoints="5" dropPoints="-5" takeable="Y" />
+  <item name="jacket" article="a" location="Old Man" takePoints="5" dropPoints="-5" takeable="Y" isContainer="Y" />
+  <item name="boots" article="a" location="Old Man" takePoints="5" dropPoints="-5" takeable="Y" />
+  <item name="Chest" article="a" location="Road" isContainer="Y" />
+  <item name="stored item" article="a" location="Chest"/>
+  <npc name="Building guard" class="OldMan" article="a" location="Building" state="Hostile">
+  	<state name="Hostile">
+  		<event onSight="player" attackCharacter="player">hostile</event>
+  	</state>
+  </npc>
+  <npc name="Old Man" class="OldMan" article="an" location="Hill" description="Upon close inspection he looks grimy" state="gruff">
+     <state name="gruff" description="He looks angry">
+       <event onSay="Say, &quot;Hello&quot;" response="In a gruff voice he says, &quot;Move along buddy.&quot;" sound="sounds/inception-stab.wav">gruff</event>
+       <event onSay="Ask for something to drink" response="He ignores your request.">gruff</event>
+       <event playerHasItem="penny" onSay="Offer to share your penny" response="&quot;Thank you, that is very kind.&quot; he responds.  Then he asks if you are cold and offers you an extra jacket." giveItem="penny">helpful</event>
+       <event onSay="Ask for his jacket" response="He hits you with his walking stick and disappear into the woods." setNpcLocation="Valley">gruff</event>
+  	   <event onSay="Take his jacket from him by force" response="Ha! You'll have to fight me for it!" attackCharacter="player">in combat</event>
+       <event onAttacked="Y" response="&quot;ARGH, I've been betrayed&quot;">in combat</event>
+       <event onTime="25" response="Whatever man.  You suck.">gruff</event>
+      </state>
+     <state name="helpful">
+       <event npcHasItem="jacket" onSay="Accept the jacket from him" response="&quot;Wear it well,&quot; he says, &quot;That jacket has survived many great adventures.&quot;" takeItem="jacket">helpful</event>
+       <event onSay="Ask for directions to the &quot;Golden City&quot;" response="&quot;Ah, now you truly are on a great adventure.  Be not afraid of fire!&quot; he says and wanders off into the woods." setNpcLocation="Hall of Mists">helpful</event>
+       <event onSay="Say [color=red]goodbye[/color] and move along" response="&quot;Take care friend,&quot; he says and wanders off into the woods." setNpcLocation="Road">helpful</event>
+       </state>
+     <state name="in combat">
+		<event onSight="player" response="By Thor, you'll not take me by surprise again!." attackCharacter="player">in combat</event>    
+     	<event onHealth="0"  npcHasItem="jacket, boots, Old man's dagger, sharpening stone" 
+     	takeItem="jacket, boots, Old man's Dagger, Sharpening Stone" acceptMoney="50" 
+     	response="By foul play, I have been defeated.">unconscious</event>
+     </state>
+     <state name="unconscious"/>
+   </npc>
+  <weapon name="Old man's Dagger" article="the" location="Old Man" takePoints="0" dropPoints="0" takeable="Y" type="dagger" target="single" effect="1d3" cooldown="1" hitChance="80" useMessage="stab" equipped="Y"/>
+  <weapon name="Laser Rifle" article="a" location="road" target="group" takePoints="0" dropPoints="0" takeable="Y" type="gun" effect="8d8" cooldown="2" hitChance="80" useMessage="laser shot" equipped="Y"/>
+  <weapon name="Scroll of Scorching" article="a" location="Jay" target="single" takePoints="0" dropPoints="0" takeable="Y" type="scroll" effect="2d4" cooldown="3" hitChance="80" useMessage="scorching spell" equipped="Y" onHitSound="sounds/cannon4.wav" onMissSound="sounds/bone-breaking-13.wav"/>
+  <weapon name="staff" article="a" location="Jay" takePoints="0" target="single" dropPoints="0" takeable="Y" type="staff" effect="1d8" cooldown="2" hitChance="80" useMessage="swing" equipped="N" />
+  <consumable name="Healing Potion" article="a" location="player" takePoints="0" dropPoints="0" hitChance="100" takeable="Y" uses="2" cooldown="5" effectType="healing" type="potion" target="self" useMessage="healing potion" effect="25"/> 
+  <combat>
+    	<class name="Rogue" defaultWeaponName="finger"  useMessage="poke" effect="5" hitChance="80" KORecovery="-1" cooldown="5" target="single">
+	       <hp max="50" regenRate="1" />
+	       <uses type="dagger"/>
+	   </class>
+	   <class name="Space Marine" defaultWeaponName="Laser pistol" useMessage="stomp" effect="5" hitChance="80"  KORecovery="10" cooldown="5" target="single">
+	       <hp max="50" regenRate="1" /><!-- regenRate is hp per world tick --> 
+	       <uses type="gun"/> <!-- Space marines can use items of type "gun" -->
+	   </class>
+	   <class name="Mage" defaultWeaponName="Hand"  useMessage="punch" effect="5" hitChance="80"  KORecovery="10" cooldown="5" target="single">
+	       <hp max="25" regenRate="2"/> 
+	       <uses type="scroll"/>
+	       <uses type="staff"/>
+	       <uses type="potion" />
+	   </class>
+	   <class name="OldMan" defaultWeaponName="Head"  useMessage="headbutt" effect="1d5" hitChance="80"  KORecovery="5" cooldown="5" target="single">
+	       <hp max="40" regenRate="1"/>
+	       <uses type="dagger" />
+	   </class>
+  </combat>
+  
+  <item name="Sharpening Stone" article="the" location="Old Man"/>
+  <item name="Adamantium ore" article="the" location="Chris"/>
+   <crafting>
+   		 <weapon name="Sharp Dagger" article="the" target="single" type="dagger" effect="1d3" cooldown="1" hitChance="80" useMessage="stab">
+		  	<item name="Old man's Dagger"/>
+		  	<item name="Sharpening Stone"/>
+		 </weapon>
+	  	<item name="Adamantium Dagger" article="the">
+	  		<item name="basic dagger"/>
+	  		<item name="ground dagger"/>
+	  	</item>
+  </crafting>
+</smallworld>

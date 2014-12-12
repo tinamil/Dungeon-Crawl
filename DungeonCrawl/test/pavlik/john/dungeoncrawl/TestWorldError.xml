@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smallworld version="1.0">
+  <place name="Bathroom" article="the">
+    <description>You are in the bathroom</description>
+    <travel direction="S">Hall</travel>
+  </place>
+  <place name="Bedroom" article="the">
+    <description>You are in the bedroom</description>
+    <travel direction="A">Hall</travel>
+  </place>
+  <place name="Hall" article="the">
+    <description>You are in the hall</description>
+    <travel direction="E">Bedroom</travel>
+    <travel direction="N">Bathroom</travel>
+    <travel direction="S">Living Room</travel>
+  </place>
+  <place name="Living Room" article="the">
+    <description>You are in the living</description>
+    <travel direction="N">Hall</travel>
+    <travel direction="W">Dining Room</travel>
+  </place>
+  <place name="Dining Room" article="the">
+    <description>You are in the dining room</description>
+    <travel direction="N">Kitchen</travel>
+    <travel direction="E">Living Room</travel>
+  </place>
+  <place name="Kitchen" article="the">
+    <description>You are in the kitchen</description>
+    <travel direction="S">Dining Room</travel>
+  </place>
+  <player location="Living Room" />
+</smallworld>

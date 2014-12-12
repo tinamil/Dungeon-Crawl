@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dungeoncrawl version="1.3" money="dollars" tickRate="500">
+  <place name="Landing Ramp" article="the">
+    <description>The place where you start.</description>
+    <travel direction="D">Landing ramp used to be</travel>
+  </place>
+  <place name="landing ramp used to be" article="where the">
+  	<description>Nothing here</description>
+    <travel direction="E">Plains of Despair</travel>
+	<travel direction="S">Highlands of Terror</travel>
+  </place>
+  <place name="Plains of Despair" article="the">
+    <description>The grass is waving ominously in the breeze.</description>
+    <travel direction="W">landing ramp used to be</travel>
+    <travel direction="N">Mountains</travel>
+  </place>
+  <place name="Mountains" article="">
+  	<description>Feel the breeze on your face.  Then look behind you.</description>
+  	<travel direction="S">Plains of Despair</travel>
+  </place>
+   <npc name="Slimy Bug" class="bug" article="A" location="Mountains" description="He's covered in slime, about 10 feet tall, and looks like he eats Marines for breakfast." state="Angry">
+    <state name="Angry">
+    	<event onSight="player" attackCharacter="player" response="Blaghathrhgh">angry</event>
+    </state>
+  </npc>
+  <weapon name="slimy sniper rifle" article="a" location="Slimy bug" target="single" type="gun" effect="8d5" cooldown="5" hitChance="90" useMessage="fire" />
+  <place name="Highlands of Terror" article="the">
+    <description>At your feet all the water of the stream splashes into a 2-inch slit in the rock. Downstream the streambed is bare rock.</description>
+    <travel direction="N">landing ramp used to be</travel>
+	<travel direction="S">Bug Zone</travel>
+  </place>
+  <place name="Bug Zone" article="the" arrivalWinsGame="N">
+    <description>It's a bug hunt! They are swarming as far as the eye can see.</description>
+    <travel direction="N">Highlands of Terror</travel>
+	<travel direction="S">Hatchery</travel>
+  </place>
+  <place name="Hatchery" article="the" arrivalWinsGame="Y">
+    <description>You've arrived in the hatchery and begin laying waste to the area.</description>
+    <travel direction="N">Bug Zone</travel>
+  </place>
+  <player class="Army" name="Pavlik" article="CPT" description="Shoots Expert." score="0" location="Landing Ramp"/>
+  <player class="Pilot" name="Ball" article="Flyboy" score="0" description="Can call in devastating airstrikes, but they are slow to recharge.  Otherwise limited to a fast firing pistol."  location="Landing Ramp"/>
+  <player class="Rambo" name="Jay" score="0" article="" description="Master gunner, primary fire support.  Suppressive Fire."  location="Landing Ramp"/>
+  <player class="Cyber Ninja" name="Ramos" score="0" article="'Icky'" description="Hacks enemy systems.  Is half-cyborg."  location="Landing Ramp"/>
+  <player name="Team Gold" article="" score="0" description=""  location="Landing Ramp"/>
+  <item name="C4" article="" location="Bug Queen" takePoints="50" takeable="Y">
+    <place blockedMsg="There is no visible entrance.  You're going to need heavy explosives to get through.">Hatchery</place>
+  </item>
+ 
+  <npc name="Bug1" class="bug" article="A" location="Bug Zone" description="He's covered in slime, about 10 feet tall, and looks like he eats Marines for breakfast." state="Angry">
+    <state name="Angry">
+    	<event onSight="player" attackCharacter="player" response="nom nom nom">angry</event>
+    </state>
+  </npc>
+  <npc name="Bug2" class="bug" article="A" location="Bug Zone" description="He's covered in slime, about 10 feet tall, and looks like he eats Marines for breakfast." state="Angry">
+    <state name="Angry" />
+  </npc>
+  <npc name="Bug3" class="bug" article="A" location="Bug Zone" description="He's covered in slime, about 10 feet tall, and looks like he eats Marines for breakfast." state="Angry">
+    <state name="Angry" />
+  </npc>
+  <npc name="Bug4" class="bug" article="A" location="Bug Zone" description="He's covered in slime, about 10 feet tall, and looks like he eats Marines for breakfast." state="Angry">
+    <state name="Angry" />
+  </npc>
+  <npc name="Bug5" class="bug" article="A" location="Bug Zone" description="He's covered in slime, about 10 feet tall, and looks like he eats Marines for breakfast." state="Angry">
+    <state name="Angry" />
+  </npc>
+  <npc name="Bug6" class="bug" article="A" location="Bug Zone" description="He's covered in slime, about 10 feet tall, and looks like he eats Marines for breakfast." state="Angry">
+    <state name="Angry" />
+  </npc>
+  <npc name="Bug Queen" class="bug queen" article="The" location="Bug Zone" description="She looks pissed off.  And is standing between you and a box of C4." state="Angry">
+    <state name="Angry" />
+  </npc>
+  <weapon name="assault rifle" article="" location="Pavlik" takePoints="0" dropPoints="0" takeable="Y" target="single" type="gun" effect="4d5" cooldown="4" hitChance="80" useMessage="fire" equipped="Y"/>
+  <consumable name="airstrike beacon" article="an" location="Ball" type="tech" effectType="damage" target="place" effect="20d8" cooldown="50" hitChance="95" useMessage="bomb" uses="25" />
+  <weapon name="pistol" article="a" type="gun" location="Ball" effect="1d10" cooldown="1" hitChance="50" target="place" useMessage="fire" equipped="Y"/>
+  <weapon name="M240B" article="an" location="Jay" type="machinegun" effect="1d10" cooldown="1" target="group" hitChance="60" useMessage="blast" equipped="Y"/>
+  <weapon name="Laser eye" article="" effect="5d6" cooldown="2" useMessage="laser" hitChance="50" location="Ramos" target="single" type="cyborg" equipped="Y" />
+  <consumable name="Medical Nanobots" article="" location="Ramos" type="tech" effectType="healing" cooldown="30" hitChance="100" effect="25" target="group" useMessage="heal"  uses="-1"/> 
+  <combat>
+    <class name="Army" KORecovery="10" effect="1d10" cooldown="1" target="group" hitChance="60" useMessage="blast" defaultWeaponName="Standard Rifle">
+	  <hp max="500" regenRate="1" />
+	  <uses type="gun"/>
+	  <uses type="machinegun"/>
+	</class>
+	<class name="Pilot" effect="1d10" cooldown="3" hitChance="50" KORecovery="10" useMessage="fire" target="single" defaultWeaponName="Standard Pistol">
+	  <hp max="350" regenRate="1"/>
+	  <uses type="gun"/> 
+	  <uses type="tech"/> 
+	</class>
+	<class name="Rambo" effect="1" cooldown="1" hitChance="50" KORecovery="5" useMessage="punch" target="single" defaultWeaponName="fist">
+	  <hp max="650" regenRate="2"/> 
+	  <uses type="machinegun"/>
+	</class>
+	<class name="Cyber Ninja" effect="4d8" cooldown="3" hitChance="95" useMessage="laser" KORecovery="20" target="single" defaultWeaponName="Laser Eye">
+	  <hp max="200" regenRate="5"/>
+	  <uses type="cyborg" />
+	  <uses type="tech" />
+    </class>
+	<class name="bug" effect="1" cooldown="1" hitChance="50" KORecovery="-1" useMessage="slash" target="single"  defaultWeaponName="claw">
+	  <hp max="100" regenRate="3"/>
+    </class>
+	<class name="Bug Queen" effect="1" cooldown="1" hitChance="50" KORecovery="-1" useMessage="impale" target="single" defaultWeaponName="claw">
+	  <hp max="1000" regenRate="20"/>
+	</class>
+  </combat>
+</dungeoncrawl>

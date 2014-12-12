@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dungeoncrawl version="1.3" money="dollars" tickRate="1500">
+<!-- All BGM was borrowed from Final Fantasy XI -->	
+<!--LOCATIONS-->
+	<place name ="Village" article="the" sound="/sounds/demoworld/BGMvillage.wav">
+		<Description>You are in a small [color=blue]village[/color].</Description>	
+		<travel direction="N">Forest</travel>
+		<travel direction="S">Field</travel>
+	</place>
+	<place name ="Field" article="the">
+		<Description>You find yourself in a grassy [color=blue]field[/color].</Description>
+		<travel direction="N">Village</travel>
+		<travel direction="E">River</travel>
+		<travel direction="W">Hill</travel>
+	</place>
+	<place name = "Forest" article="the">
+		<description>You are in a [color=blue]forest[/color]. You can hear various wildlife in the distance</description>
+		<travel direction="S">Village</travel>
+		<travel direction="W">Temple</travel>
+		<travel direction="N">Deep Forest</travel>
+	</place>
+	<place name = "Deep Forest" article="the">
+		<description>You are in the [color=blue]deepest part of the forest[/color]. It's quite dark here. Something is likely to attack you.</description>
+		<travel direction="S">Forest</travel>	
+	</place>
+	<place name = "River" article="the">
+		<description>After a bit of a walk, you see a [color=blue]river[/color] wandering through the landscape</description>
+		<travel direction="W">Field</travel>
+	</place>
+	<place name = "Hill" article="a">
+		<description>You are located on a [color=blue]hill[/color] that neighbors the village</description>
+		<travel direction="E">Field</travel>
+		<travel direction="N">Cliffs</travel>
+	</place>
+	<place name = "Cliffs" article="the">
+		<description>You stand on the [color=blue]cliffs[/color] overlooking the village</description>
+		<travel direction="S">Hill</travel>
+	</place>
+	<place name = "Temple" article="the">
+		<description>You are in the ruins of an old [color=blue]temple[/color]</description>
+		<travel direction="E">Forest</travel>
+		<travel direction="W">Inner Temple</travel>
+	</place>
+	<place name = "Inner Temple" article="the">
+		<description>You have unlocked the door and found yourself in the dark [color=blue]inner temple[/color], it doesn't seem like anyone has been here for a long time</description>
+		<travel direction="E">Temple</travel>
+		<travel direction="W">Altar Room</travel>
+	</place>
+	<place name = "Altar Room" article="the" sound="/sounds/demoworld/inception-stab.wav" arrivalWinsGame="Y">
+		<description>You are in the temple's [color=blue]altar room[/color] Despite not being visited for many years, it feels as if some evil forces are at work here</description>
+		<travel direction = "E">Inner Temple</travel>
+	</place>
+
+<!--FRIENDLY NPCS -->
+  <npc name="Marisa" article="Miss" location="Village" description="A energetic young woman wearing a pointy, wide brimmed hat and a big smile" state="curious">
+     <!-- Her voice comes from www.ivona.com English,British,Emma, if any future changes are required. -->
+     <state name="curious" description="She seems curious upon seeing you">
+      
+       <event onSay="Say, &quot;Hello&quot;" 
+       response="She gives you a beaming smile &quot;I have never seen you around before, are you new here?&quot;" 
+       sound="/sounds/demoworld/marisa-hello.wav">curious</event>
+       
+       <event onSay="Ask for a healing potion" 
+       response="She shrugs her shoulders &quot;I'm fresh out of those, sorry! But, maybe you can help me get materials for new ones? There's some magical flowers to the south that is super good for making these!&quot;" 
+       sound="/sounds/demoworld/marisa-askpotion.wav">quest1</event>
+       
+     </state>
+     
+     <state name="quest1">
+     	
+     	<event onSay= "Review current request" 
+     	response="She gives you a puzzled look &quot;You couldn't find any? I'm certain I saw a whole bunch of magic flowers in the field to the south&quot;" 
+     	sound="/sounds/demoworld/marisa-reviewquest1.wav">quest1</event>
+      	
+      	<event playerHasItem="magic flower" onSay="Give magic flower" 
+      	response="&quot;Thank you! Give me just a moment&quot; she responds.  She then performs a bit of what appears to be alchemy to create a potion." 
+      	giveItem="magic flower" sound="/sounds/demoworld/marisa-quest1-turnin.wav">trusting</event>
+     
+     </state>
+     
+     <state name="trusting">
+     	
+     	<event onSay= "Is there anything else you need?" 
+     	response="She thinks for a moment and then replies &quot;No, not currently. Come back later!&quot;" 
+     	sound="/sounds/demoworld/marisa-trusting-need.wav">trusting</event>
+     	
+     	<event npcHasItem= "Marisa's Potion" onSay= "Buy potion" 
+     	response="She beams a smile towards you &quot;There's no way I could charge you after you helped me make these, you earned this one for free! Be careful though, this one is more potent than most. I'd save it for a super special occasion!&quot;" 
+     	takeItem="Marisa's Potion" sound="/sounds/demoworld/marisa-trusting-buypotion.wav">trusting</event>
+     
+     </state>
+  </npc>
+    
+<!--UNFRIENDLY NPCS-->
+	<npc name="Giant Lizard" class="Lizard" article="a" location="River" description="A rather large lizard, it looks as if it would eat a person for lunch" state="basking">
+		<state name="basking" description="The lizard seems to be just basking in the sun. Best to not bother it unless you want a fight">
+			<event onSay="Leave it alone" respone="You decide that you should let it be for now">basking</event>	
+		</state>
+	</npc>
+   <npc name="Feral Wolf" class="Wolf" article="a" location="Forest" description="An incredibly aggressive beast, it will relentlessly attack anything that comes near" state="angry">
+		<state name="angry" description="This wolf does not look very happy">
+			<event onSight="player" attackCharacter="player" sound="/sounds/demoworld/wolfbite.wav"/>
+		</state>
+   </npc>
+   <npc name="Wriggle's Nightbug" class="Insect" article="" location="Deep Forest" description="" state="angry">
+   		<state name="angry" description="This bug doesn't take kindly to you being here">
+   			<event onSight="player" attackCharacter="player"/>
+   		</state>   
+   </npc>
+
+<!--COMBAT CLASSES-->
+	<combat>
+	   <class name="Mage" defaultWeaponName="Hand"  useMessage="punch" effect="5" hitChance="80"  KORecovery="10" cooldown="5" target="single">
+	       <hp max="50" regenRate="2"/> 
+	       <uses type="scroll"/>
+	       <uses type="staff"/>
+	   </class>
+	   <class name="Fighter" defaultWeaponName="Hand"  useMessage="punch" effect="5" hitChance="80"  KORecovery="10" cooldown="5" target="single">
+	   		<hp max="100" regenRate="2"/>
+	   		<uses type="sword"/>
+	   </class>
+	   <class name="Lizard" defaultWeaponName="Mouth"  useMessage="bite" effect="5" hitChance="80" KORecovery="25" cooldown="5" target="single">
+	   		<hp max = "1000" regenRate="5" />
+	   		<uses type="tooth"/>
+	   </class>
+	   <class name="Wolf" defaultWeaponName="Mouth" useMessage="bite" effect="3" hitChance="85" KORecovery="-1" cooldown="2" target="single" onHitSound="/sounds/demoworld/wolfhit.wav" onMissSound="/sounds/demoworld/wolfmiss.wav">
+	   		<hp max = "150" regenRate="2"/>
+	   		<uses type="tooth"/>
+	   </class>
+	   <class name="Insect" defaultWeaponName="Mouth" useMessage="bite" effect="5" hitChance="85" KORecovery="-1" cooldown="2" target="single">
+	   		<hp max = "1250" regenRate="5"/>
+	   		<uses type="tooth"/>
+	   </class>
+	</combat>
+	
+<!--PLAYERS-->
+	<player class ="Mage" name="Chaika" score="0" article="" description="An unusual white-haired girl"  location="Village"/>
+	<player class ="Fighter" name="Braum" score="0" article="" description="A burly gentleman" location="Village"/>
+
+
+<!--ITEMS-->
+	<item name="magic flower" article="a" location="Field" takePoints="5" dropPoints="0" takeable="Y" />
+	<item name="Lizard's Tooth" article="a" location="Giant Lizard" />
+	<item name="Wolf's Tooth" article="a" location="Feral Wolf"/>
+	<item name="sturdy branch" article="a" location="Forest"/>
+	<item name="shiny gem" article="a" location="Chaika"/>
+	<consumable name="Marisa's Potion" article="" location="Marisa" takePoints="0" dropPoints="0" hitChance="100" takeable="Y" uses="2" cooldown="5" effectType="healing" type="potion" target="self" useMessage="healing potion" effect="25"/> 
+	<item name="Key" article="the" location="Feral Wolf" takePoints="5" dropPoints="-5" takeable="Y">
+		<place blockedMsg="You need a key to enter here.">Inner Temple</place>
+	</item>
+  
+<!--WEAPONS-->
+	<weapon name="cheap wand" article="a" location="Chaika" takePoints="0" target="single" dropPoints="0" takeable="Y" type="staff" effect="1d8" cooldown="2" hitChance="80" useMessage="spell" equipped="Y" />  
+    <weapon name="bronze sword" article="a" location="Braum" takePoints="0" target="single" dropPoints="0" takeable="Y" type="sword" effect="1d6" cooldown="2" hitChance="80" useMessage="swing" equipped="Y" onHitSound="/sounds/demoworld/swordhit.wav" onMissSound="/sounds/demoworld/swordmiss.wav" />
+	
+  
+<!--CRAFTING-->
+   <crafting>
+   		<weapon name="mage's wand" article="" target="single" type="staff" effect="2d8" cooldown="2" hitChance="80" useMessage="spell">
+		  	<item name="sturdy branch"/>
+		  	<item name="shiny gem"/>
+		 </weapon>
+	  	<weapon name="enchanted sword" article="" target="single" type="sword" effect="2d6" cooldown="2" hitChance="80" useMessage="swing">
+	  		<item name="Wolf's Tooth"/>
+	  		<item name="Bronze Sword"/>
+	  	</weapon>
+   </crafting>
+    
+ </dungeoncrawl>

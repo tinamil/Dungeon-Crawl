@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smallworld version="1.0">
+	<place name="Bathroom" article="the">
+		<description>You are in the bathroom</description>
+		<travel direction="S">Hall</travel>
+	</place>
+	<place name="Bedroom" article="the" arrivalWinsGame="Y">
+		<description>You are in the bedroom</description>
+		<travel direction="W">Hall</travel>
+	</place>
+	<place name="Hall" article="the">
+		<description>You are in the hall</description>
+		<travel direction="E">Bedroom</travel>
+		<travel direction="N">Bathroom</travel>
+		<travel direction="S">Living Room</travel>
+	</place>
+	<place name="Living Room" article="the">
+		<description>You are in the living</description>
+		<travel direction="N">Hall</travel>
+		<travel direction="W">Dining Room</travel>
+	</place>
+	<place name="Dining Room" article="the">
+		<description>You are in the dining room</description>
+		<travel direction="N">Kitchen</travel>
+		<travel direction="E">Living Room</travel>
+	</place>
+	<place name="Kitchen" article="the">
+		<description>You are in the kitchen</description>
+		<travel direction="S">Dining Room</travel>
+	</place>
+	<player name="player" article="" location="Living Room" />
+	<item name="Key" article="a" location="Hall" takePoints="5"
+		dropPoints="-10" takeable="Y">
+		<place dropPoints="500">Kitchen</place>
+		<place blockedMsg="It's locked.">Bedroom</place>
+	</item>
+	<item name="Penny" article="a" location="Player" takePoints="-0" dropPoints="0" takeable="Y" />
+	<item name="rock" article="the" location="Hall" takePoints="5"
+		dropPoints="-10" takeable="N" cantTakeMsg="Not movable"></item>
+</smallworld>
